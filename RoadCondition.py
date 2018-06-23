@@ -27,7 +27,7 @@ def handle(text, mic, profile, wxbot=None):
     mic.say(u'哪条道路')
     input = mic.activeListen(MUSIC=True)
     if input is None:
-        input = "龙岗大道"
+        input = "知春路"
     
   
     url_transit = "http://restapi.amap.com/v3/traffic/status/road"

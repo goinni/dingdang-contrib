@@ -8,7 +8,7 @@ import time
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-WORDS = ["FAXIN"]
+WORDS = ["FAWEIXIN"]
 SLUG = "send_message"
 
 def handle(text, mic, profile, wxbot=None):
@@ -17,7 +17,7 @@ def handle(text, mic, profile, wxbot=None):
         text_utf8 = text.decode('utf8')
         # 匹配规则：[给|向] XXX(微信昵称) [发信|发信息|发送信息|发送消息|发消息]  说 XXX(消息内容)
         # 微信昵称 -- 中文，名称2-15位长度; 消息内容 -- 1-25位长度
-        PATTERN = ur'(给|向)([\u4e00-\u9fa5]{2,15})(发信|发送|发消息)(\S+)(说)(\S+)'
+        PATTERN = ur'(给|向)([\u4e00-\u9fa5]{2,15})(发微信|发送|发消息)(\S+)(说)(\S+)'
         pattern = re.compile(PATTERN)
         m = pattern.search(text_utf8)
         if not m or m.lastindex < 3:
@@ -48,4 +48,4 @@ def handle(text, mic, profile, wxbot=None):
         mic.say('抱歉，消息没有提交成功', cache=True)
 
 def isValid(text):
-    return any(word in text for word in [u"发信", u"发送", u"发消息"])
+    return any(word in text for word in [u"发微信", u"发送", u"发消息"])
