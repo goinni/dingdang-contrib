@@ -52,7 +52,7 @@ def handle(text, mic, profile, wxbot=None):
         input = mic.activeListen(MUSIC=True)
         if input is not None:
             mic.say('好哒，这就为您诊断', cache=True)
-            time.sleep(1)
+            #time.sleep(1)
             # 获取诊断信息
             entity = getDiseaseEntity(input)
             if entity[u'definition'] is not None:
