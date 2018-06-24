@@ -57,7 +57,8 @@ def handle(text, mic, profile, wxbot=None):
             entity = getDiseaseEntity(input)
             if entity[u'definition'] is not None:
                 mic.say('亲爱的，您好像是得了'+entity[u'diseaseName']+'，'+ entity[u'definition']+'，以上结果由惠每医疗提供，仅供参考', cache=True)
-            mic.say('亲爱的，您好像是得了'+entity[u'diseaseName']+'，生病了要多喝水哦，请注意休息哦，以上结果由惠每医疗提供，仅供参考', cache=True)
+            else:
+                mic.say('亲爱的，您好像是得了'+entity[u'diseaseName']+'，生病了要多喝水哦，请注意休息哦，以上结果由惠每医疗提供，仅供参考', cache=True)
             return
         mic.say('老娘没听清，再说一次呗', cache=True)
     except Exception, e:
