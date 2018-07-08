@@ -9,7 +9,7 @@ import json,urllib2
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-WORDS = ["XIAOMEI","JIAOMEI","LIUJIAO","AJIAO"]
+WORDS = ["XIAOMEI","SHENTIBUSHUFU","NANSHOU","AJIAO"]
 SLUG = "hmxiaomei"
 
 
@@ -48,7 +48,7 @@ def getDiseaseEntity(words):
 def handle(text, mic, profile, wxbot=None):
     logger = logging.getLogger(__name__)
     try:
-        mic.say('亲爱的，您哪里不舒服。请在滴一声后说出您的症状', cache=True)
+        mic.say('亲，您哪里不舒服。请在滴一声后说出您的症状', cache=True)
         input = mic.activeListen(MUSIC=True)
         if input is not None:
             mic.say('好哒，这就为您诊断', cache=True)
@@ -56,15 +56,15 @@ def handle(text, mic, profile, wxbot=None):
             # 获取诊断信息
             entity = getDiseaseEntity(input)
             if entity[u'definition'] is not None:
-                mic.say('亲爱的，您好像是得了'+entity[u'diseaseName']+'，'+ entity[u'definition']+'，以上结果由惠每医疗提供，仅供参考', cache=True)
+                mic.say('亲，您好像是得了'+entity[u'diseaseName']+'，'+ entity[u'definition']+'，以上结果由惠每医疗提供，仅供参考', cache=True)
             else:
-                mic.say('亲爱的，您好像是得了'+entity[u'diseaseName']+'，生病了要多喝水哦，请注意休息哦，以上结果由惠每医疗提供，仅供参考', cache=True)
+                mic.say('亲，您好像是得了'+entity[u'diseaseName']+'，生病了要多喝水哦，请注意休息哦，以上结果由惠每医疗提供，仅供参考', cache=True)
             return
-        mic.say('老娘没听清，再说一次呗', cache=True)
+        mic.say('没听清，再说一次呗', cache=True)
     except Exception, e:
         logger.error(e)
-        mic.say('啊，出错了，一会儿再试一下', cache=True)
+        mic.say('接口没有识别，请重新描述您的症状', cache=True)
 
 def isValid(text):
-    return any(word in text for word in [u"小梅", u"娇妹", u"刘娇", u"阿娇"])
+    return any(word in text for word in [u"小梅", u"身体不舒服", u"难受", u"阿娇"])
 
